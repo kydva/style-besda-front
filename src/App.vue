@@ -1,11 +1,18 @@
 <template>
   <div id="app">
-
+    <NavBar></NavBar>
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar'
 
+export default {
+  components: {NavBar}
+}
 </script>
 
 <style>
@@ -15,6 +22,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
