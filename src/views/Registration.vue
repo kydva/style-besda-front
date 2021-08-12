@@ -2,6 +2,7 @@
   <div>
     <h3>Sign up</h3>
     <form class="form-group w-50 mx-auto">
+      <div class="alert-danger mb-1" v-bind:key="error.message" v-for="error in errors">{{ error }} </div>
       <input placeholder="Name" v-model="name" class="form-control my-2" type="text" name="name">
       <input placeholder="Password" v-model="password" class="form-control my-2" name="password">
       <input placeholder="Password confirm" v-model="passwordConfirm" class="form-control my-2" name="password">
@@ -17,6 +18,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      errors: [],
       name: null,
       password: null,
       passwordConfirm: null
@@ -31,22 +33,16 @@ export default {
       }
 
       try {
-        const res = await axios.post('http://localhost:3000/registration', {
+        await axios.post('http://localhost:3000/registration', {
           name: this.name,
           password: this.password,
           password_confirm: this.passwordConfirm
         }, {withCredentials: true});
-        if (res.status === 201) {
-          window.location.href = '/'
-        }
-        else if (res.data.error === 'PasswordNotConfirmed') {
-          alert('CONFIRM PASSWORD!!!!!')
-        }
-        else if (res.data.error === 'ValidationError') {
-          alert('INVALID DATA!!!')
-        }
+        window.location.href = '/'
       } catch (e) {
-        alert(e.response.status)
+        if (e.response.status === 400) {
+          this.errors = e.response.data.errors
+        }
       }
 
 
