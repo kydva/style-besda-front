@@ -1,51 +1,50 @@
 <template>
     <div>
         <h3>Sign in</h3>
-        <form class="form-group w-50 mx-auto">
+        <form class="w-50 mx-auto" @submit.prevent="onSubmit">
+            <div v-if="error" class="alert-danger">{{ error }}</div>
             <input
                 placeholder="Name"
-                v-model="name"
-                class="form-control my-2"
+                v-model="credentials.name"
+                class="form-control"
                 type="text"
                 name="name"
             />
             <input
                 placeholder="Password"
-                v-model="password"
-                class="form-control my-2"
+                v-model="credentials.password"
+                class="form-control"
+                type="password"
                 name="password"
             />
-            <button class="btn btn-outline-secondary" @click="onSubmit">Send</button>
+            <button class="btn btn-outline-secondary">Send</button>
         </form>
     </div>
 </template>
 
 <script>
-import axios from "axios";
+import { LOGIN } from "../store/actions.type";
 
 export default {
     data() {
         return {
-            name: null,
-            password: null,
+            credentials: {
+                name: null,
+                password: null,
+            },
+            error: null,
         };
     },
     methods: {
-        async onSubmit(e) {
-            e.preventDefault();
-
+        async onSubmit() {
             try {
-                await axios.post(
-                    "http://localhost:3000/login",
-                    {
-                        name: this.name,
-                        password: this.password,
-                    },
-                    { withCredentials: true }
-                );
-                window.location.href = "/";
+                this.error = null;
+                await this.$store.dispatch(LOGIN, this.credentials);
+                this.$router.back();
             } catch (e) {
-                alert(e.response.status);
+                if (e.response.status === 401) {
+                    this.error = "Invalid username or password. Please, try again.";
+                }
             }
         },
     },
@@ -53,4 +52,7 @@ export default {
 </script>
 
 <style scoped>
+.form-control {
+    margin: 1rem 0 1rem 0;
+}
 </style>

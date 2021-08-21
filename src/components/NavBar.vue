@@ -13,11 +13,8 @@
                     </li>
                     <li class="nav-item">
                         <router-link class="d-inline-flex text-decoration-none" to="/my-profile">
-                            <div
-                                class="avatar"
-                                :style="{ backgroundImage: 'url(' + avatar + ')' }"
-                            ></div>
-                            <a class="username nav-link">{{ userName }}</a>
+                            <div class="avatar" :style="avatarStyle"></div>
+                            <a class="username nav-link">{{ user.name }}</a>
                         </router-link>
                     </li>
                 </ul>
@@ -35,24 +32,19 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapGetters } from "vuex";
 
 export default {
-    data() {
-        return {
-            isAuthenticated: false,
-            userName: null,
-            avatar: "https://upload.wikimedia.org/wikipedia/ru/thumb/9/9e/Lenin._Sculptors_Bogolyubov_and_Ingal._1950.png/240px-Lenin._Sculptors_Bogolyubov_and_Ingal._1950.png",
-        };
-    },
-
-    async mounted() {
-        const res = await axios.get("http://localhost:3000/me", { withCredentials: true });
-        if (res.data.name) {
-            this.isAuthenticated = true;
-            this.userName = res.data.name;
-            this.avatar = res.data.avatar || this.avatar;
-        }
+    computed: {
+        ...mapGetters(["user", "isAuthenticated", "isAdmin"]),
+        avatarStyle() {
+            const avatar =
+                this.user.avatar ||
+                "https://upload.wikimedia.org/wikipedia/commons/6/68/Young_stalin_screenshot.jpg";
+            return {
+                backgroundImage: "url(" + avatar + ")",
+            };
+        },
     },
 };
 </script>
@@ -60,7 +52,6 @@ export default {
 <style scoped>
 .avatar {
     margin-left: 1.5rem;
-
     width: 40px;
     height: 40px;
     background-size: cover;

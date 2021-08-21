@@ -1,65 +1,52 @@
 <template>
     <div>
         <h3>Sign up</h3>
-        <form class="form-group w-50 mx-auto">
-            <div class="alert-danger mb-1" v-bind:key="error.message" v-for="error in errors">
+        <form class="form-group w-50 mx-auto" @submit.prevent="onSubmit">
+            <div class="alert-danger" :key="field" v-for="(error, field) in errors">
                 {{ error }}
             </div>
-            <input
-                placeholder="Name"
-                v-model="name"
-                class="form-control my-2"
-                type="text"
-                name="name"
-            />
+            <input placeholder="Name" v-model="credentials.name" class="form-control" type="text" />
             <input
                 placeholder="Password"
-                v-model="password"
-                class="form-control my-2"
-                name="password"
+                type="password"
+                v-model="credentials.password"
+                class="form-control"
             />
             <input
-                placeholder="Password confirm"
-                v-model="passwordConfirm"
-                class="form-control my-2"
-                name="password"
+                placeholder="Password confirmation"
+                type="password"
+                v-model="credentials.passwordConfirm"
+                class="form-control"
             />
-            <button class="btn btn-outline-secondary" @click="onSubmit">Send</button>
+            <button class="btn btn-outline-secondary">Send</button>
         </form>
     </div>
 </template>
 
 <script>
-import axios from "axios";
+import { REGISTER } from "../store/actions.type";
 
 export default {
     data() {
         return {
+            credentials: {
+                name: null,
+                password: null,
+                passwordConfirm: null,
+            },
             errors: [],
-            name: null,
-            password: null,
-            passwordConfirm: null,
         };
     },
     methods: {
-        async onSubmit(e) {
-            e.preventDefault();
-
-            if (this.password !== this.passwordConfirm) {
-                alert("CONFIRM PASSWORD!!!!");
+        async onSubmit() {
+            if (this.credentials.password !== this.credentials.passwordConfirm) {
+                this.errors = { passwordConfirm: "Password is not confirmed" };
+                return;
             }
 
             try {
-                await axios.post(
-                    "http://localhost:3000/registration",
-                    {
-                        name: this.name,
-                        password: this.password,
-                        password_confirm: this.passwordConfirm,
-                    },
-                    { withCredentials: true }
-                );
-                window.location.href = "/";
+                await this.$store.dispatch(REGISTER, this.credentials);
+                this.$router.back();
             } catch (e) {
                 if (e.response.status === 400) {
                     this.errors = e.response.data.errors;
@@ -71,4 +58,7 @@ export default {
 </script>
 
 <style scoped>
+.form-control {
+    margin: 1rem 0 1rem 0;
+}
 </style>

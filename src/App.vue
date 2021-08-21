@@ -9,9 +9,13 @@
 
 <script>
 import NavBar from "@/components/NavBar";
+import { FETCH_USER } from "./store/actions.type";
 
 export default {
     components: { NavBar },
+    async mounted() {
+        this.$store.dispatch(FETCH_USER);
+    },
 };
 </script>
 
