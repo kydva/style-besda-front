@@ -26,9 +26,9 @@ export default {
             commit(mutations.SET_USER, res.data.user);
         },
 
-        async [actions.REGISTER]({ commit }, credentials) {
-            const res = await axios.post("http://localhost:3000/register", credentials, { withCredentials: true });
-            commit(mutations.SET_USER, res.data.user);
+        async [actions.REGISTER]({ dispatch }, credentials) {
+            await axios.post("http://localhost:3000/register", credentials, { withCredentials: true });
+            dispatch(actions.FETCH_USER);
         },
 
         async [actions.FETCH_USER]({ commit }) {
