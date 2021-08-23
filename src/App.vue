@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <NavBar></NavBar>
+        <TheNavBar></TheNavBar>
         <div class="container">
             <router-view></router-view>
         </div>
@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar";
+import TheNavBar from "@/components/TheNavBar";
 import { FETCH_CATEGORIES, FETCH_USER } from "./store/actions.type";
 
 export default {
-    components: { NavBar },
+    components: { TheNavBar },
     async mounted() {
         this.$store.dispatch(FETCH_USER);
         this.$store.dispatch("pieceCategories/" + FETCH_CATEGORIES);

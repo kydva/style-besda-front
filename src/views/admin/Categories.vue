@@ -1,21 +1,21 @@
 <template>
     <div>
         <h3>Add category</h3>
-        <addCategory/>
+        <TheCategoryAddForm />
         <hr class="my-5" />
         <h3>Edit category</h3>
-        <editCategory/>
+        <TheCategoryEditForm />
     </div>
 </template>
 
 <script>
-import AddCategory from "../../components/admin/TheCategoryAddForm.vue";
-import EditCategory from "../../components/admin/TheCategoryEditForm.vue";
+import TheCategoryAddForm from "../../components/admin/TheCategoryAddForm.vue";
+import TheCategoryEditForm from "../../components/admin/TheCategoryEditForm.vue";
 
 export default {
     components: {
-        AddCategory,
-        EditCategory,
-    }
+        TheCategoryAddForm,
+        TheCategoryEditForm,
+    },
 };
 </script>
