@@ -9,12 +9,13 @@
 
 <script>
 import NavBar from "@/components/NavBar";
-import { FETCH_USER } from "./store/actions.type";
+import { FETCH_CATEGORIES, FETCH_USER } from "./store/actions.type";
 
 export default {
     components: { NavBar },
     async mounted() {
         this.$store.dispatch(FETCH_USER);
+        this.$store.dispatch("pieceCategories/" + FETCH_CATEGORIES);
     },
 };
 </script>
