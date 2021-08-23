@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -11,5 +12,21 @@ const routes = [
 ];
 
 const router = new VueRouter({ routes, mode: "history" });
+
+router.beforeResolve((to, from, next) => {
+    if (to.meta.guest && store.getters.isAuthenticated) {
+        return next(false);
+    }
+
+    if (to.meta.admin && !store.getters.isAdmin) {
+        return next(false);
+    }
+
+    if (to.meta.authenticated && !store.getters.isAuthenticated) {
+        return next("/login");
+    }
+
+    next();
+});
 
 export default router;
