@@ -28,4 +28,9 @@ export default {
     text-align: center;
     color: #2c3e50;
 }
+
+.form-group {
+    text-align: left;
+    margin-bottom: 1rem;
+}
 </style>

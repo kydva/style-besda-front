@@ -69,10 +69,6 @@ export default {
 </script>
 
 <style scoped>
-.form-group {
-    text-align: left;
-    margin-bottom: 1rem;
-}
 .btn {
     margin: 0 0.5rem 0.5rem 0.5rem;
 }

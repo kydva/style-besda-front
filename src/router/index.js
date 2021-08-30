@@ -8,7 +8,8 @@ const routes = [
     { name: "home", path: "/", component: () => import("@/views/Home") },
     { name: "login", path: "/login", component: () => import("@/views/Login"), meta: { guest: true } },
     { name: "register", path: "/register", component: () => import("@/views/Register"), meta: { guest: true } },
-    { name: "categories", path: "/admin/categories", component: () => import("@/views/admin/Categories"), meta: { admin: true } }
+    { name: "categories", path: "/admin/categories", component: () => import("@/views/admin/Categories"), meta: { admin: true } },
+    { name: "pieces", path: "/admin/pieces", component: () => import("@/views/admin/Pieces"), meta: {admin: true}}
 ];
 
 const router = new VueRouter({ routes, mode: "history" });

@@ -49,9 +49,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.form-group {
-    text-align: left;
-    margin-bottom: 1rem;
-}
-</style>
