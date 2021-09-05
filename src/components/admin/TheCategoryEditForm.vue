@@ -5,7 +5,7 @@
         </div>
         <div class="form-group">
             <label for="piece-category-select" class="form-label">Category</label>
-            <PieceCategorySelect id="piece-category-select" @select="onSelect" />
+            <PieceCategorySelect id="piece-category-select" v-model="category.id" />
         </div>
 
         <div class="form-group">
@@ -60,9 +60,6 @@ export default {
                 this.errors = e.response.data.errors;
             }
             alert("Category has been removed");
-        },
-        onSelect(node) {
-            this.category.id = node._id;
         },
     },
 };

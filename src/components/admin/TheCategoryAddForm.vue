@@ -8,8 +8,15 @@
             <input v-model="category.name" required class="form-control" type="text" id="name" />
         </div>
         <div class="form-group">
+            <label class="form-label" for="gender">Gender</label>
+            <select class="form-select" id="gender" v-model="category.gender">
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="piece-category-select" class="form-label">Parent</label>
-            <PieceCategorySelect id="piece-category-select" @select="onSelect" />
+            <PieceCategorySelect id="piece-category-select" v-model="category.parent" />
         </div>
         <button class="btn btn-outline-secondary">Send</button>
     </form>
@@ -28,6 +35,7 @@ export default {
             category: {
                 name: null,
                 parent: null,
+                gender: null,
             },
             errors: {},
         };
@@ -41,10 +49,7 @@ export default {
             } catch (e) {
                 this.errors = e.response.data.errors;
             }
-        },
-        onSelect(parentNode) {
-            this.category.parent = parentNode._id;
-        },
+        }
     },
 };
 </script>

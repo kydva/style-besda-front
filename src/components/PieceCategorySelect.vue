@@ -1,5 +1,11 @@
 <template>
-    <Treeselect @select="onSelect" :options="categories" :value="value" :normalizer="normalizer" />
+    <Treeselect
+        v-model="val"
+        :options="categories"
+        :normalizer="normalizer"
+        :multiple="multiple"
+        :always-open="alwaysOpen"
+    />
 </template>
 
 <script>
@@ -9,8 +15,12 @@ import { mapState } from "vuex";
 
 export default {
     components: { Treeselect },
+    props: {
+        value: [Array, String],
+        multiple: Boolean,
+        alwaysOpen: Boolean,
+    },
     data: () => ({
-        value: null,
         normalizer(node) {
             return {
                 id: node._id,
@@ -19,13 +29,16 @@ export default {
             };
         },
     }),
-    methods: {
-        onSelect(id) {
-            this.$emit("select", id);
-        },
-    },
     computed: {
         ...mapState("pieceCategories", ["categories"]),
+        val: {
+            get() {
+                return this.value;
+            },
+            set(val) {
+                this.$emit("input", val);
+            },
+        },
     },
 };
 </script>

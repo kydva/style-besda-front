@@ -10,7 +10,7 @@
             </div>
             <div class="form-group">
                 <label for="category-select" class="form-label">Category</label>
-                <PieceCategorySelect id="category-select" @select="onCategorySelect" />
+                <PieceCategorySelect id="category-select" v-model="piece.category" />
             </div>
 
             <div class="form-group">
@@ -59,9 +59,7 @@ export default {
         onImgSelect(event) {
             this.piece.img = event.target.files[0] ?? null;
         },
-        onCategorySelect(node) {
-            this.piece.category = node._id;
-        },
+
     },
 };
 </script>
