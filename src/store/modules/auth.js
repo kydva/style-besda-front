@@ -32,7 +32,7 @@ export default {
         },
 
         async [actions.FETCH_USER]({ commit }) {
-            const res = await axios.get("http://localhost:3000/me", { withCredentials: true });
+            const res = await axios.get("http://localhost:3000/users/me", { withCredentials: true });
             if (res.data.user) {
                 commit(mutations.SET_USER, res.data.user);
             } else commit(mutations.PURGE_USER);
