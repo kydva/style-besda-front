@@ -2,12 +2,17 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store";
 
+import Wardrobe from "@/views/Wardrobe";
+
+
 Vue.use(VueRouter);
 
 const routes = [
     { name: "home", path: "/", component: () => import("@/views/Home") },
     { name: "login", path: "/login", component: () => import("@/views/Login"), meta: { guest: true } },
     { name: "register", path: "/register", component: () => import("@/views/Register"), meta: { guest: true } },
+    { name: "wardrobe", path: "/wardrobe", component: Wardrobe, meta: { isAuthenticated: true } },
+    { name: "wardrobe-fill", path: "/wardrobe/fill-up", component: Wardrobe, props: { filling: true }, meta: { isAuthenticated: true } },
     { name: "categories", path: "/admin/categories", component: () => import("@/views/admin/Categories"), meta: { admin: true } },
     { name: "pieces", path: "/admin/pieces", component: () => import("@/views/admin/Pieces"), meta: {admin: true}}
 ];

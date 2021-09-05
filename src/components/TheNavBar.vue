@@ -6,7 +6,15 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav" v-if="isAuthenticated">
                     <li class="nav-item">
-                        <router-link class="nav-link" to="#">Wardrobe</router-link>
+                        <div class="dropdown">
+                            <router-link class="nav-link" to="/wardrobe"
+                                >Wardrobe <i class="fas fa-caret-down"></i>
+                            </router-link>
+                            <div class="dropdown-content">
+                                <router-link to="/wardrobe">My wardrobe</router-link>
+                                <router-link to="/wardrobe/fill-up">Fill up</router-link>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="#">My looks</router-link>
