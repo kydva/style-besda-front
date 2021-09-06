@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="filter-panel">
-            <form class="d-inline-flex p-2">
+            <form class="d-inline-flex search-form p-2">
                 <input
                     class="form-control mr-sm-2"
                     type="search"
@@ -11,7 +11,7 @@
                 <button class="btn btn-outline-secondary ms-2">Search</button>
             </form>
 
-            <div class="filter-panel-item dropdown">
+            <div class="category-dropdown dropdown">
                 Category <i class="fas fa-caret-down"></i>
                 <div class="dropdown-content">
                     <PieceCategorySelect
@@ -65,6 +65,16 @@
             </div>
             <InfiniteLoading :identifier="infiniteId" spinner="spiral" @infinite="infiniteHandler">
                 <div slot="no-more"></div>
+                <div v-if="!filling" slot="no-results">
+                    <div class="h2 mt-4">Your wardrobe is empty!</div>
+                    <router-link
+                        tag="button"
+                        class="btn btn-success ms-auto m-2"
+                        to="/wardrobe/fill-up"
+                    >
+                        <span class="h3"><i class="fas fa-plus"></i> Fill up</span>
+                    </router-link>
+                </div>
             </InfiniteLoading>
         </div>
     </div>
@@ -136,13 +146,29 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 575.98px) {
+    .piece {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 767.98px) {
+    .filter-panel {
+        flex-wrap: wrap;
+    }
+
+    .search-form {
+        flex: 100%;
+    }
+}
+
 .filter-panel {
     margin-top: 2rem;
     display: flex;
     background-color: #292b2c;
 }
 
-.filter-panel-item {
+.category-dropdown {
     padding: 1rem;
     color: #81898f;
 }
@@ -155,6 +181,13 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     height: 300px;
+    border: 1px solid #b1b1b1;
+    border-radius: 4px;
+    background: rgb(249, 249, 249);
+    background: linear-gradient(45deg, rgba(249, 249, 249, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    -webkit-box-shadow: -3px 2px 8px 0px rgba(34, 60, 80, 0.09);
+    -moz-box-shadow: -3px 2px 8px 0px rgba(34, 60, 80, 0.09);
+    box-shadow: -3px 2px 8px 0px rgba(34, 60, 80, 0.09);
 }
 
 .img-fluid {
@@ -164,14 +197,5 @@ export default {
 .piece .btn,
 .piece-name {
     margin: 1rem 0;
-}
-
-.slide-enter-active,
-.slide-leave-active {
-    transition: opacity 0.5s;
-}
-.slide-enter,
-.slide-leave-to {
-    opacity: 0;
 }
 </style>
