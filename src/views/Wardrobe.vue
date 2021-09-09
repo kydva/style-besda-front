@@ -43,7 +43,7 @@
                     <div class="img-container">
                         <img
                             class="img-fluid piece-img rounded"
-                            :src="'http://localhost:3000/img/' + piece.img"
+                            :src="'http://localhost:3000/img/pieces/' + piece.img"
                         />
                     </div>
 

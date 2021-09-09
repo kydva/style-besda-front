@@ -9,7 +9,7 @@ export default {
 
     actions: {
         async [actions.FETCH_CATEGORIES]({ commit }) {
-            const res = await axios.get("http://localhost:3000/piece-categories");
+            const res = await axios.get("http://localhost:3000/piece-categories", {withCredentials: true});
             commit(mutations.SET_CATEGORIES, res.data.categories);
         },
 

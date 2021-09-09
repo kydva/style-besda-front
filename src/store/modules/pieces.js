@@ -17,7 +17,7 @@ export default {
             await axios.post("http://localhost:3000/pieces", formData, {withCredentials: true});
         },
 
-        async [actions.FETCH_PIECES]({commit, state}, query){
+        async [actions.FETCH_PIECES]({commit, state}, query = {}){
             const res = await axios.get("http://localhost:3000/pieces", {params: query, withCredentials: true});
             if (query.skip === state.pieces.length && query.skip !== 0) {
                 commit(mutations.ADD_PIECES, res.data.pieces);

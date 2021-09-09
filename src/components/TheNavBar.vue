@@ -17,7 +17,16 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="#">My looks</router-link>
+                        <div class="dropdown">
+                            <router-link class="nav-link" to="/looks/discover"
+                                >Looks <i class="fas fa-caret-down"></i>
+                            </router-link>
+                            <div class="dropdown-content">
+                                <router-link to="/looks/discover">Discover</router-link>
+                                <router-link to="/looks/favorites">Favorites</router-link>
+                                <router-link to="/looks/create">Create new look</router-link>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <router-link class="d-inline-flex text-decoration-none" to="/my-profile">
