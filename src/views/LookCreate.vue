@@ -1,7 +1,10 @@
 <template>
     <div>
-        <h1 class="py-2">Create look</h1>
+        <h1 class="my-4">Create look</h1>
+
         <form class="w-75 mx-auto" @submit.prevent="onSubmit">
+            <div v-if="loading" class="fa-2x"><i class="fas fa-spinner fa-spin"></i></div>
+            <div v-if="created" class="text-success">Look successfully created</div>
             <div class="alert-danger" :key="field" v-for="(error, field) in errors">
                 {{ error }}
             </div>
@@ -63,6 +66,8 @@ export default {
             img: null,
         },
         errors: {},
+        loading: false,
+        created: false
     }),
     computed: {
         ...mapState("pieces", ["pieces"]),
@@ -82,9 +87,14 @@ export default {
         },
         async onSubmit() {
             try {
+                this.created = false;
+                this.loading = true;
                 await this.$store.dispatch("looks/" + ADD_LOOK, this.look);
+                this.created = true;
             } catch (e) {
                 this.errors = e.response.data.errors;
+            } finally {
+                this.loading = false;
             }
         },
         onImgSelect(event) {
