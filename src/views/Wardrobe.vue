@@ -40,9 +40,9 @@
                     class="col-lg-2 col-md-3 col-sm-5 piece"
                 >
                     <div class="piece-name">{{ piece.name }}</div>
-                    <div class="img-container">
+                    <div>
                         <img
-                            class="img-fluid piece-img rounded"
+                            class="img-fluid rounded"
                             :src="'http://localhost:3000/img/pieces/' + piece.img"
                         />
                     </div>
@@ -146,21 +146,6 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 575.98px) {
-    .piece {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 767.98px) {
-    .filter-panel {
-        flex-wrap: wrap;
-    }
-
-    .search-form {
-        flex: 100%;
-    }
-}
 
 .filter-panel {
     margin-top: 2rem;
@@ -197,5 +182,21 @@ export default {
 .piece .btn,
 .piece-name {
     margin: 1rem 0;
+}
+
+@media screen and (max-width: 575.98px) {
+    .piece {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 767.98px) {
+    .filter-panel {
+        flex-wrap: wrap;
+    }
+
+    .search-form {
+        flex: 100%;
+    }
 }
 </style>

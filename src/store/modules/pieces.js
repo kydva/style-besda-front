@@ -58,14 +58,18 @@ export default {
             const piece = state.pieces.find((piece) => {
                 return piece._id === pieceId;
             });
-            piece.inWardrobe = true;
+            if (piece) {
+                piece.inWardrobe = true;
+            }
         },
 
         [mutations.REMOVE_FROM_WARDROBE](state, pieceId) {
             const piece = state.pieces.find((piece) => {
                 return piece._id === pieceId;
             });
+            if (piece) {
             piece.inWardrobe = false;
+            }
         }
     },
 
