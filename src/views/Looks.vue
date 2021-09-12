@@ -245,6 +245,29 @@ export default {
     color: rgb(180, 54, 54);
 }
 
+@media screen and (max-width: 1199.98px) {
+    .look {
+        flex: 40%;
+    }
+
+    .dropdown-content {
+        min-width: 140px;
+    }
+
+    .add-to-wardrobe-btn {
+        display: none;
+    }
+
+    .look {
+        height: 400px;
+        padding: 1rem 1rem 0 1rem;
+    }
+
+    .look-img {
+        max-height: 280px;
+    }
+}
+
 @media screen and (max-width: 767.98px) {
     .look {
         flex: 90%;
