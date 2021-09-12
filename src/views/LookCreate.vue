@@ -10,9 +10,17 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="gender">Gender</label>
-                <select class="form-select" id="gender" v-model="look.gender">
+                <select required class="form-select" id="gender" v-model="look.gender">
                     <option value="M">Male</option>
                     <option value="F">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="gender">Season</label>
+                <select required class="form-select" id="gender" v-model="look.season">
+                    <option value="Summer">Summer</option>
+                    <option value="Demi-season">Demi-season</option>
+                    <option value="Winter">Winter</option>
                 </select>
             </div>
             <div class="form-group">
@@ -38,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label for="image" class="form-label">Image</label>
-                <input type="file" class="form-control" id="image" @change="onImgSelect" />
+                <input required type="file" class="form-control" id="image" @change="onImgSelect" />
             </div>
             <button class="btn btn-outline-secondary">Send</button>
         </form>
@@ -62,6 +70,7 @@ export default {
         },
         look: {
             pieces: [],
+            season: "",
             gender: "",
             img: null,
         },
