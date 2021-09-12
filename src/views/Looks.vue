@@ -3,6 +3,7 @@
         <div class="looks">
             <div v-for="look in looks" :key="look._id" class="look">
                 <div class="fa-2x d-flex justify-content-between">
+                    <div>
                     <i
                         title="Add to favorites"
                         :class="look.isLiked ? 'fas' : 'far'"
@@ -10,6 +11,7 @@
                         class="like-btn fa-thumbs-up"
                         @click="onLikeBtnClick(look)"
                     ></i>
+                    </div>
                     <div class="look-img-container">
                         <img
                             class="img-fluid rounded look-img"
