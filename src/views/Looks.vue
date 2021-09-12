@@ -2,11 +2,29 @@
     <div>
         <div class="looks">
             <div v-for="look in looks" :key="look._id" class="look">
-                <div>
-                    <img
-                        class="img-fluid rounded look-img"
-                        :src="'http://localhost:3000/img/looks/' + look.img"
-                    />
+                <div class="fa-2x d-flex justify-content-between">
+                    <i
+                        title="Add to favorites"
+                        :class="look.isLiked ? 'fas' : 'far'"
+                        :style="look.isDisliked ? 'visibility: hidden' : ''"
+                        class="like-btn fa-thumbs-up"
+                        @click="onLikeBtnClick(look)"
+                    ></i>
+                    <div class="look-img-container">
+                        <img
+                            class="img-fluid rounded look-img"
+                            :src="'http://localhost:3000/img/looks/' + look.img"
+                        />
+                    </div>
+                    <div>
+                        <i
+                            title="Hide"
+                            :class="look.isDisliked ? 'fas' : 'far'"
+                            :style="look.isLiked ? 'visibility: hidden' : ''"
+                            class="dislike-btn fa-thumbs-down"
+                            @click="onDislikeBtnClick(look)"
+                        ></i>
+                    </div>
                 </div>
                 <div class="pieces">
                     <div v-for="piece in look.pieces" :key="piece._id" class="piece">
@@ -41,7 +59,8 @@
         <InfiniteLoading :identifier="infiniteId" spinner="spiral" @infinite="infiniteHandler">
             <div slot="no-more"></div>
             <div slot="no-results" class="no-results">
-                <div>
+                <div v-if="favorites" class="h2 text-secondary">Empty</div>
+                <div v-else>
                     <div class="h2" v-if="user.wardrobe.length === 0">Your wardrobe is empty!</div>
                     <div class="h2" v-else>There are no recommendations for you :(</div>
                     <router-link
@@ -61,8 +80,15 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
-import { ADD_TO_WARDROBE, FETCH_LOOKS } from "../store/actions.type";
+import { mapGetters, mapMutations, mapState } from "vuex";
+import {
+    ADD_TO_FAVORITES,
+    ADD_TO_WARDROBE,
+    CANCEL_LOOK_DISLIKE,
+    DISLIKE_LOOK,
+    FETCH_LOOKS,
+    REMOVE_FROM_FAVORITES,
+} from "../store/actions.type";
 import InfiniteLoading from "vue-infinite-loading";
 import { PURGE_LOOKS } from "../store/mutations.type";
 
@@ -73,10 +99,8 @@ export default {
     },
     data() {
         return {
-            query: {
-                limit: 6,
-                skip: 0,
-            },
+            limit: 6,
+            skip: 0,
             infiniteId: 1,
         };
     },
@@ -87,29 +111,47 @@ export default {
     watch: {
         favorites() {
             this.infiniteId++;
+            this.purgeLooks();
         },
     },
     methods: {
+        ...mapMutations("looks", [PURGE_LOOKS]),
         reloadLooks() {
-            this.$store.commit("looks/" + PURGE_LOOKS);
-            this.query.skip = 0;
+            this.purgeLooks();
+            this.skip = 0;
             this.infiniteId++;
         },
         async infiniteHandler($state) {
-            await this.$store.dispatch("looks/" + FETCH_LOOKS, this.query);
+            const query = {
+                limit: this.limit,
+                skip: this.skip,
+                favorites: this.favorites,
+            };
+            await this.$store.dispatch("looks/" + FETCH_LOOKS, query);
             if (this.looks.length === this.totalResults) {
                 if (this.totalResults !== 0) {
                     $state.loaded();
                 }
                 return $state.complete();
             }
-            this.query.skip = this.looks.length;
+            this.skip = this.looks.length;
             $state.loaded();
         },
         async addPieceToWardrobe(pieceId) {
             await this.$store.dispatch("pieces/" + ADD_TO_WARDROBE, pieceId);
             this.reloadLooks();
         },
+        async onLikeBtnClick(look) {
+            const action = look.isLiked ? REMOVE_FROM_FAVORITES : ADD_TO_FAVORITES;
+            await this.$store.dispatch("looks/" + action, look._id);
+        },
+        async onDislikeBtnClick(look) {
+            const action = look.isDisliked ? CANCEL_LOOK_DISLIKE : DISLIKE_LOOK;
+            await this.$store.dispatch("looks/" + action, look._id);
+        },
+    },
+    mounted() {
+        this.reloadLooks();
     },
 };
 </script>
@@ -133,7 +175,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 500px;
+    height: 450px;
     border: 1px solid #b1b1b1;
     border-radius: 4px;
     background: rgb(249, 249, 249);
@@ -145,6 +187,10 @@ export default {
 
 .look-img {
     max-height: 300px;
+}
+
+.look-img-container {
+    width: 70%;
 }
 
 .dropdown-content {
@@ -175,6 +221,28 @@ export default {
     left: 1rem;
     cursor: pointer;
     color: #28a745;
+}
+
+.like-btn,
+.dislike-btn {
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.like-btn {
+    color: #588061;
+}
+
+.dislike-btn {
+    color: rgb(184, 98, 98);
+}
+
+.like-btn:hover {
+    color: #28a745;
+}
+
+.dislike-btn:hover {
+    color: rgb(180, 54, 54);
 }
 
 @media screen and (max-width: 767.98px) {

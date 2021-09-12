@@ -23,6 +23,22 @@ export default {
                 commit(mutations.SET_LOOKS, res.data.looks);
                 commit(mutations.SET_TOTAL_RESULTS, res.data.totalResults);
             }
+        },
+        async [actions.ADD_TO_FAVORITES]({commit}, lookId){
+            await axios.put("http://localhost:3000/users/me/favorites/" + lookId, null, {withCredentials: true});
+            commit(mutations.ADD_TO_FAVORITES, lookId);
+        },
+        async [actions.REMOVE_FROM_FAVORITES]({commit}, lookId){
+            await axios.delete("http://localhost:3000/users/me/favorites/" + lookId,  {withCredentials: true});
+            commit(mutations.REMOVE_FROM_FAVORITES, lookId);
+        },
+        async [actions.DISLIKE_LOOK]({commit}, lookId){
+            await axios.put("http://localhost:3000/users/me/hidden-looks/" + lookId, null, {withCredentials: true});
+            commit(mutations.DISLIKE_LOOK, lookId);
+        },
+        async [actions.CANCEL_LOOK_DISLIKE]({commit}, lookId){
+            await axios.delete("http://localhost:3000/users/me/hidden-looks/" + lookId,  {withCredentials: true});
+            commit(mutations.CANCEL_LOOK_DISLIKE, lookId);
         }
     },
     mutations: {
@@ -37,7 +53,39 @@ export default {
         },
         [mutations.SET_TOTAL_RESULTS](state, count){
             state.totalResults = count;
-        }
+        },
+        [mutations.ADD_TO_FAVORITES](state, lookId){
+            state.looks = state.looks.map((look) => {
+                if (look._id === lookId) {
+                    look.isLiked = true;
+                }
+                return look;
+            });
+        },
+        [mutations.REMOVE_FROM_FAVORITES](state, lookId){
+            state.looks = state.looks.map((look) => {
+                if (look._id === lookId) {
+                    look.isLiked = false;
+                }
+                return look;
+            });
+        },
+        [mutations.DISLIKE_LOOK](state, lookId){
+            state.looks = state.looks.map((look) => {
+                if (look._id === lookId) {
+                    look.isDisliked = true;
+                }
+                return look;
+            });
+        },
+        [mutations.CANCEL_LOOK_DISLIKE](state, lookId){
+            state.looks = state.looks.map((look) => {
+                if (look._id === lookId) {
+                    look.isDisliked = false;
+                }
+                return look;
+            });
+        },
     },
     namespaced: true
 };

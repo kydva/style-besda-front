@@ -15,3 +15,7 @@ export const REMOVE_FROM_WARDROBE = "removeFromWardrobe";
 
 export const ADD_LOOK = "addLook";
 export const FETCH_LOOKS = "fetchLooks";
+export const ADD_TO_FAVORITES = "addToFavorites";
+export const REMOVE_FROM_FAVORITES = "removeFromFavorites";
+export const DISLIKE_LOOK = "dislikeLook";
+export const CANCEL_LOOK_DISLIKE = "cancelLookDislike";
