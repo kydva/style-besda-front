@@ -1,16 +1,48 @@
 <template>
     <div>
+        <div class="filter-panel text-secondary">
+            <div class="filter-panel-item">
+                <select
+                    class="form-select"
+                    @change="(e) => this.$router.push('/looks/' + e.target.value)"
+                >
+                    <option value="recommended">Recommended</option>
+                    <option value="favorites">Favorites</option>
+                </select>
+            </div>
+
+            <div class="filter-panel-item">
+                <label class="me-2" for="season">Season:</label>
+                <select class="form-select" id="season" v-model="season">
+                    <option :value="null">Any</option>
+                    <option value="Summer">Summer</option>
+                    <option value="Demi-season">Demi-season</option>
+                    <option value="Winter">Winter</option>
+                </select>
+            </div>
+
+            <div class="filter-panel-item ms-md-auto">
+                <label class="me-2" for="show-disliked">Show disliked:</label>
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="show-disliked"
+                    v-model="showDisliked"
+                />
+            </div>
+        </div>
+
         <div class="looks">
             <div v-for="look in looks" :key="look._id" class="look">
                 <div class="fa-2x d-flex justify-content-between">
                     <div>
-                    <i
-                        title="Add to favorites"
-                        :class="look.isLiked ? 'fas' : 'far'"
-                        :style="look.isDisliked ? 'visibility: hidden' : ''"
-                        class="like-btn fa-thumbs-up"
-                        @click="onLikeBtnClick(look)"
-                    ></i>
+                        <i
+                            title="Add to favorites"
+                            :class="look.isLiked ? 'fas' : 'far'"
+                            :style="look.isDisliked ? 'visibility: hidden' : ''"
+                            class="like-btn fa-thumbs-up"
+                            @click="onLikeBtnClick(look)"
+                        ></i>
                     </div>
                     <div class="look-img-container">
                         <img
@@ -103,17 +135,25 @@ export default {
         return {
             limit: 6,
             skip: 0,
+            season: null,
+            showDisliked: false,
             infiniteId: 1,
         };
     },
     computed: {
         ...mapGetters(["user"]),
         ...mapState("looks", ["looks", "totalResults"]),
+        filter() {
+            return {
+                season: this.season,
+                showDisliked: this.showDisliked,
+                favorites: this.favorites,
+            };
+        },
     },
     watch: {
-        favorites() {
-            this.infiniteId++;
-            this.purgeLooks();
+        filter() {
+            this.reloadLooks();
         },
     },
     methods: {
@@ -125,9 +165,9 @@ export default {
         },
         async infiniteHandler($state) {
             const query = {
+                ...this.filter,
                 limit: this.limit,
                 skip: this.skip,
-                favorites: this.favorites,
             };
             await this.$store.dispatch("looks/" + FETCH_LOOKS, query);
             if (this.looks.length === this.totalResults) {
@@ -159,6 +199,22 @@ export default {
 </script>
 
 <style scoped>
+.filter-panel {
+    margin-top: 2rem;
+    display: flex;
+    background-color: #292b2c;
+}
+
+.form-select {
+    width: initial;
+    display: initial;
+    padding: 0.175rem 2.25rem 0.175rem 0.75rem;
+}
+
+.filter-panel-item {
+    margin: 1rem;
+}
+
 .no-results {
     margin-top: 25vh;
 }
@@ -273,6 +329,10 @@ export default {
 @media screen and (max-width: 767.98px) {
     .look {
         flex: 90%;
+    }
+
+    .filter-panel {
+        flex-wrap: wrap;
     }
 }
 </style>

@@ -18,11 +18,11 @@
                     </li>
                     <li class="nav-item">
                         <div class="dropdown">
-                            <router-link class="nav-link" to="/looks/discover"
+                            <router-link class="nav-link" to="/looks/recommended"
                                 >Looks <i class="fas fa-caret-down"></i>
                             </router-link>
                             <div class="dropdown-content">
-                                <router-link to="/looks/discover">Discover</router-link>
+                                <router-link to="/looks/recommended">Recommended</router-link>
                                 <router-link to="/looks/favorites">Favorites</router-link>
                                 <router-link to="/looks/create">Create new look</router-link>
                             </div>

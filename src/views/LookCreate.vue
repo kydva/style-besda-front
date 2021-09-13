@@ -16,8 +16,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label class="form-label" for="gender">Season</label>
-                <select required class="form-select" id="gender" v-model="look.season">
+                <label class="form-label" for="season">Season</label>
+                <select required class="form-select" id="season" v-model="look.season">
                     <option value="Summer">Summer</option>
                     <option value="Demi-season">Demi-season</option>
                     <option value="Winter">Winter</option>
