@@ -28,7 +28,7 @@ export default {
 
         async [actions.REGISTER]({ dispatch }, userData) {
             await axios.post("http://localhost:3000/register", userData, { withCredentials: true });
-            dispatch(actions.FETCH_USER);
+            await dispatch(actions.FETCH_USER);
         },
 
         async [actions.FETCH_USER]({ commit }) {
@@ -36,6 +36,15 @@ export default {
             if (res.data.user) {
                 commit(mutations.SET_USER, res.data.user);
             } else commit(mutations.PURGE_USER);
+        },
+
+        async [actions.UPDATE_USER]({dispatch}, payload) {
+            const formData = new FormData();
+            Object.keys(payload).forEach((key) => {
+                formData.append(key, payload[key]);
+            });
+            await axios.patch("http://localhost:3000/users/me", formData, { withCredentials: true });
+            await dispatch(actions.FETCH_USER);
         }
     },
 

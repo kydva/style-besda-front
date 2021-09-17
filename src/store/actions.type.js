@@ -1,6 +1,7 @@
 export const LOGIN = "login";
 export const REGISTER = "register";
 export const FETCH_USER = "fetchUser";
+export const UPDATE_USER = "updateUser";
 export const LOGOUT = "logout";
 
 export const FETCH_CATEGORIES = "fetchCategories";
