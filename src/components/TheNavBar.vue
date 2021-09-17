@@ -29,10 +29,20 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <router-link class="d-inline-flex text-decoration-none" to="/my-profile">
-                            <div class="avatar" :style="avatarStyle"></div>
-                            <a class="username nav-link">{{ user.name }}</a>
-                        </router-link>
+                        <div class="dropdown">
+                            <router-link
+                                class="d-inline-flex text-decoration-none"
+                                to="/my-profile"
+                            >
+                                <UserAvatar :min="true" :user="user" />
+                                <a class="username nav-link"
+                                    >{{ user.name }} <i class="fas fa-caret-down"></i
+                                ></a>
+                            </router-link>
+                            <div class="dropdown-content user-dropdown">
+                                <router-link to="/my-profile/settings">Settings</router-link>
+                            </div>
+                        </div>
                     </li>
                 </ul>
                 <ul class="navbar-nav" v-else>
@@ -50,32 +60,17 @@
 
 <script>
 import { mapGetters } from "vuex";
+import UserAvatar from "./UserAvatar.vue";
 
 export default {
+    components: { UserAvatar },
     computed: {
         ...mapGetters(["user", "isAuthenticated", "isAdmin"]),
-        avatarStyle() {
-            const avatar =
-                this.user.avatar ||
-                "https://upload.wikimedia.org/wikipedia/commons/6/68/Young_stalin_screenshot.jpg";
-            return {
-                backgroundImage: "url(" + avatar + ")",
-            };
-        },
     },
 };
 </script>
 
 <style scoped>
-.avatar {
-    margin-left: 1.5rem;
-    width: 40px;
-    height: 40px;
-    background-size: cover;
-    background-position: top center;
-    border-radius: 50%;
-}
-
 .username {
     padding-left: 0.5rem;
 }
@@ -83,5 +78,10 @@ export default {
 .navbar-nav {
     height: 2.5rem;
     margin: 0.5rem 0 0.5rem 0;
+}
+
+.user-dropdown {
+    right: 0;
+    text-align: end;
 }
 </style>
