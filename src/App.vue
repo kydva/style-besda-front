@@ -2,7 +2,9 @@
     <div id="app">
         <TheNavBar></TheNavBar>
         <div class="container">
-            <router-view></router-view>
+            <transition mode="out-in" name="fade">
+                <router-view></router-view>
+            </transition>
         </div>
     </div>
 </template>
@@ -62,5 +64,12 @@ export default {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
