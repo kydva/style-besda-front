@@ -41,6 +41,7 @@
                             </router-link>
                             <div class="dropdown-content user-dropdown">
                                 <router-link to="/my-profile/settings">Settings</router-link>
+                                <a href="#" @click.prevent="logout">Logout</a>
                             </div>
                         </div>
                     </li>
@@ -59,7 +60,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import UserAvatar from "./UserAvatar.vue";
 
 export default {
@@ -67,6 +68,9 @@ export default {
     computed: {
         ...mapGetters(["user", "isAuthenticated", "isAdmin"]),
     },
+    methods: {
+        ...mapActions(["logout"])
+    }
 };
 </script>
 

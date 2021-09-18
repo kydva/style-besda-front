@@ -31,6 +31,11 @@ export default {
             await dispatch(actions.FETCH_USER);
         },
 
+        async [actions.LOGOUT]({commit}) {
+            await axios.get("http://localhost:3000/logout", {withCredentials: true});
+            commit(mutations.PURGE_USER);
+        },
+
         async [actions.FETCH_USER]({ commit }) {
             const res = await axios.get("http://localhost:3000/users/me", { withCredentials: true });
             if (res.data.user) {
