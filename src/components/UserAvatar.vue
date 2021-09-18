@@ -41,5 +41,8 @@ export default {
 
 .avatar {
     max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 </style>

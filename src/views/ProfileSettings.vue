@@ -29,8 +29,6 @@
                     <UserAvatar :user="user" />
                     <UserAvatar :user="user" :min="true" class="min-avatar" />
                 </div>
-
-                <div class="avatar-min"></div>
                 <div class="form-group">
                     <input
                         type="file"

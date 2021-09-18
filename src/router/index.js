@@ -11,6 +11,7 @@ const routes = [
     { name: "home", path: "/", component: () => import("@/views/Home") },
     { name: "login", path: "/login", component: () => import("@/views/Login"), meta: { guest: true } },
     { name: "register", path: "/register", component: () => import("@/views/Register"), meta: { guest: true } },
+    { name: "profile", path: "/users/:id", component: () => import("@/views/Profile")},
     { name: "profile-settings", path: "/my-profile/settings", component: () => import("@/views/ProfileSettings"), meta: { authenticated: true } },
     { name: "wardrobe", path: "/wardrobe", component: Wardrobe, meta: { authenticated: true } },
     { name: "wardrobe-fill", path: "/wardrobe/fill-up", component: Wardrobe, props: { filling: true }, meta: { authenticated: true } },

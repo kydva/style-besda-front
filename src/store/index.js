@@ -4,6 +4,7 @@ import user from "./modules/user";
 import pieceCategories from "./modules/piece-categories";
 import pieces from "./modules/pieces";
 import looks from "./modules/looks";
+import profile from "./modules/profile";
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         user,
         pieceCategories,
         pieces,
-        looks
+        looks,
+        profile
     }
 });

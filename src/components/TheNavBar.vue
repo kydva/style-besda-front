@@ -32,7 +32,7 @@
                         <div class="dropdown">
                             <router-link
                                 class="d-inline-flex text-decoration-none"
-                                to="/my-profile"
+                                :to="'/users/' + user._id"
                             >
                                 <UserAvatar :min="true" :user="user" />
                                 <a class="username nav-link"
