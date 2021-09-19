@@ -17,7 +17,8 @@ const routes = [
     { name: "wardrobe-fill", path: "/wardrobe/fill-up", component: Wardrobe, props: { filling: true }, meta: { authenticated: true } },
     { name: "looks-recommended", path: "/looks/recommended", component: Looks, meta: { authenticated: true } },
     { name: "looks-favorites", path: "/looks/favorites", component: Looks, props: { favorites: true }, meta: { authenticated: true } },
-    { name: "looks-create", path: "/looks/create", component: () => import("@/views/LookCreate.vue"), meta: { authenticated: true } },
+    { name: "looks-create", path: "/looks/create", component: () => import("@/views/LookCreate"), meta: { authenticated: true } },
+    { name: "look", path: "/looks/:id", component: () => import("@/views/Look")},
     { name: "categories", path: "/admin/categories", component: () => import("@/views/admin/Categories"), meta: { admin: true } },
     { name: "pieces", path: "/admin/pieces", component: () => import("@/views/admin/Pieces"), meta: {admin: true}}
 ];

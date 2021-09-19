@@ -44,12 +44,12 @@
                             @click="onLikeBtnClick(look)"
                         ></i>
                     </div>
-                    <div class="look-img-container">
+                    <router-link :to="'/looks/' + look._id" class="look-img-container">
                         <img
                             class="img-fluid rounded look-img"
                             :src="'http://localhost:3000/img/looks/' + look.img"
                         />
-                    </div>
+                    </router-link>
                     <div>
                         <i
                             title="Hide"
@@ -245,8 +245,12 @@ export default {
 
 .look-img {
     max-height: 300px;
+    -webkit-transition: 0.4s all;
 }
 
+.look-img:hover {
+    -webkit-filter: brightness(90%);
+}
 .look-img-container {
     width: 70%;
 }

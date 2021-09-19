@@ -11,6 +11,7 @@ export const PURGE_PIECES = "purgePieces";
 export const ADD_TO_WARDROBE = "addToWardrobe";
 export const REMOVE_FROM_WARDROBE = "removeFromWardrobe";
 
+export const SET_LOOK = "setLook";
 export const SET_LOOKS = "setLooks";
 export const ADD_LOOKS = "addLooks";
 export const PURGE_LOOKS = "purgeLooks";

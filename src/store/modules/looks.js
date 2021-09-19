@@ -5,9 +5,14 @@ import axios from "axios";
 export default {
     state: {
         looks: [],
+        look: {},
         totalResults: null
     },
     actions: {
+        async [actions.FETCH_LOOK]({commit}, id) {
+            const res = await axios.get("http://localhost:3000/looks/" + id, {withCredentials: true});
+            commit(mutations.SET_LOOK, res.data.look);
+        },
         async [actions.ADD_LOOK](context, look) {
             const formData = new FormData();
             Object.keys(look).forEach((key) => {
@@ -42,6 +47,9 @@ export default {
         }
     },
     mutations: {
+        [mutations.SET_LOOK](state, look) {
+            state.look = look;
+        },
         [mutations.SET_LOOKS](state, looks){
             state.looks = looks;
         },
