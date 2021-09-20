@@ -13,6 +13,9 @@ export default {
             const res = await axios.get("http://localhost:3000/looks/" + id, {withCredentials: true});
             commit(mutations.SET_LOOK, res.data.look);
         },
+        async [actions.DELETE_LOOK](context, id){
+            await axios.delete("http://localhost:3000/looks/" + id, {withCredentials: true});
+        },
         async [actions.ADD_LOOK](context, look) {
             const formData = new FormData();
             Object.keys(look).forEach((key) => {

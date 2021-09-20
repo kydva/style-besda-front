@@ -29,10 +29,17 @@
                     <i :class="look.isDisliked ? 'fas' : 'far'" class="fa-thumbs-down"></i>
                     Don't recommend me this look
                 </div>
-                <div v-if="!look.canRemove" class="remove-btn">
+                <div
+                    v-if="!look.canRemove"
+                    @click="() => (deleteConfirm = true)"
+                    class="remove-btn"
+                >
                     <i class="fas fa-trash"></i>
-                    Delete look
+                    Delete
                 </div>
+                <ConfirmModal v-if="deleteConfirm" @confirm="deleteLook" @cancel="() => (deleteConfirm = false)">
+                    Are you sure you want to delete this look?
+                </ConfirmModal>
             </div>
             <div class="pieces">
                 <div v-for="piece in look.pieces" :key="piece._id" class="piece">
@@ -69,16 +76,23 @@
 <script>
 import { mapState } from "vuex";
 import UserAvatar from "../components/UserAvatar.vue";
+import ConfirmModal from "../components/ConfirmModal.vue";
 import {
     ADD_TO_FAVORITES,
     ADD_TO_WARDROBE,
     CANCEL_LOOK_DISLIKE,
+    DELETE_LOOK,
     DISLIKE_LOOK,
     FETCH_LOOK,
     REMOVE_FROM_FAVORITES,
 } from "../store/actions.type";
 export default {
-    components: { UserAvatar },
+    components: { UserAvatar, ConfirmModal },
+    data() {
+        return {
+            deleteConfirm: false,
+        };
+    },
     computed: {
         ...mapState("looks", ["look"]),
         ...mapState(["user"]),
@@ -98,6 +112,11 @@ export default {
             await this.$store.dispatch("looks/" + action, this.look._id);
             this.look.isDisliked = !this.look.isDisliked;
         },
+        async deleteLook() {
+            this.deleteConfirm = false;
+            await this.$store.dispatch("looks/" + DELETE_LOOK, this.look._id);
+            this.$router.back();
+        }
     },
     async mounted() {
         const lookId = this.$route.params.id;
@@ -218,7 +237,7 @@ export default {
 
 @media screen and (max-width: 767.98px) {
     .look {
-        width: 100%
+        width: 100%;
     }
 
     .look-author-label,
