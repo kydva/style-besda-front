@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3 mb-4">
             <router-link to="/" class="navbar-brand">Style Besda</router-link>
             <div class="navbar-toggler">
-                <Slide right noOverlay class="nav-item">
+                <Slide closeOnNavigation right noOverlay class="nav-item">
                     <template v-if="isAuthenticated">
                         <span class="menu-section-name">Wardrobe</span>
                         <router-link to="/wardrobe">My wardrobe</router-link>

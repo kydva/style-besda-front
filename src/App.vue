@@ -49,6 +49,8 @@ export default {
     min-width: 150px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    -webkit-animation: fadeIn 0.4s;
+    animation: fadeIn 0.4s;
 }
 
 .dropdown-content a {
@@ -68,11 +70,28 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.2s;
+    transition: opacity 0.1s;
 }
 
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 </style>
