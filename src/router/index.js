@@ -26,15 +26,15 @@ const routes = [
 const router = new VueRouter({ routes, mode: "history" });
 
 router.beforeResolve((to, from, next) => {
-    if (to.meta.guest && store.getters.isAuthenticated) {
+    if (to.matched.some(record => record.meta.guest) && store.getters.isAuthenticated) {
         return next(false);
     }
 
-    if (to.meta.admin && !store.getters.isAdmin) {
+    if (to.matched.some(record => record.meta.admin) && !store.getters.isAdmin) {
         return next(false);
     }
 
-    if (to.meta.authenticated && !store.getters.isAuthenticated) {
+    if (to.matched.some(record => record.meta.authenticated) && !store.getters.isAuthenticated) {
         return next("/login");
     }
 
