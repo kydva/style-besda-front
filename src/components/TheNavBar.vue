@@ -80,9 +80,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import UserAvatar from "./UserAvatar.vue";
 import { Slide } from "vue-burger-menu";
+import { LOGOUT } from "../store/actions.type";
 
 export default {
     components: { UserAvatar, Slide },
@@ -90,7 +91,10 @@ export default {
         ...mapGetters(["user", "isAuthenticated", "isAdmin"]),
     },
     methods: {
-        ...mapActions(["logout"]),
+        async logout() {
+            await this.$store.dispatch(LOGOUT);
+            this.$router.push("/");
+        },
     },
 };
 </script>
