@@ -42,3 +42,10 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.vue-treeselect {
+    min-width: 15rem;
+    max-width: 50vw;
+}
+</style>
