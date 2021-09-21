@@ -313,10 +313,6 @@ export default {
         flex: 40%;
     }
 
-    .dropdown-content {
-        min-width: 140px;
-    }
-
     .add-to-wardrobe-btn {
         display: none;
     }
@@ -338,6 +334,12 @@ export default {
 
     .filter-panel {
         flex-wrap: wrap;
+    }
+
+    .dropdown-content {
+        right: -4rem;
+        left: initial;
+        max-width: 70vw;
     }
 }
 </style>
