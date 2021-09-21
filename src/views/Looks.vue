@@ -273,7 +273,8 @@ export default {
 }
 
 .piece-name {
-    padding: 1rem;
+    width: 9rem;
+    margin: 1rem;
     text-align: center;
 }
 

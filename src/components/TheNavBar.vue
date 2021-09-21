@@ -2,7 +2,27 @@
     <div>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3 mb-4">
             <router-link to="/" class="navbar-brand">Style Besda</router-link>
-
+            <div class="navbar-toggler">
+                <Slide right noOverlay class="nav-item">
+                    <template v-if="isAuthenticated">
+                        <span class="menu-section-name">Wardrobe</span>
+                        <router-link to="/wardrobe">My wardrobe</router-link>
+                        <router-link to="/wardrobe/fill-up">Fill up</router-link>
+                        <span class="menu-section-name">Looks</span>
+                        <router-link to="/looks/recommended">Recommended</router-link>
+                        <router-link to="/looks/favorites">Favorites</router-link>
+                        <router-link to="/looks/create">Create new look</router-link>
+                        <span class="menu-section-name">Profile</span>
+                        <router-link :to="'/users/' + user._id">My profile</router-link>
+                        <router-link to="/my-profile/settings">Settings</router-link>
+                        <a href="#" @click.prevent="logout">Logout</a>
+                    </template>
+                    <template v-else>
+                        <router-link to="/login">Sign in</router-link>
+                        <router-link to="/register">Sign up</router-link>
+                    </template>
+                </Slide>
+            </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav" v-if="isAuthenticated">
                     <li class="nav-item">
@@ -62,15 +82,16 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import UserAvatar from "./UserAvatar.vue";
+import { Slide } from "vue-burger-menu";
 
 export default {
-    components: { UserAvatar },
+    components: { UserAvatar, Slide },
     computed: {
         ...mapGetters(["user", "isAuthenticated", "isAdmin"]),
     },
     methods: {
-        ...mapActions(["logout"])
-    }
+        ...mapActions(["logout"]),
+    },
 };
 </script>
 
@@ -87,5 +108,49 @@ export default {
 .user-dropdown {
     right: 0;
     text-align: end;
+}
+
+.menu-section-name {
+    padding: 1rem;
+    font-weight: bold;
+    color: whitesmoke;
+}
+</style>
+
+<style>
+.bm-burger-bars {
+    background-color: rgb(231, 231, 231);
+}
+
+.bm-burger-button {
+    position: relative;
+    top: 0;
+    left: 0 !important;
+}
+
+.bm-item-list > * {
+    justify-content: flex-end;
+    padding: 0.4rem;
+}
+
+.bm-item-list > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.bm-item-list > * > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.bm-item-list {
+    margin-left: 0;
+    margin-right: 10%;
+}
+
+.cross-style {
+    position: absolute;
+    top: 12px;
+    right: 2px;
 }
 </style>
