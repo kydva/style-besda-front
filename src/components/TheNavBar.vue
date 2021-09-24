@@ -25,6 +25,15 @@
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav" v-if="isAuthenticated">
+                     <li class="nav-item" v-if="isAdmin">
+                        <div class="dropdown">
+                            <span class="nav-link">Admin panel <i class="fas fa-caret-down"></i></span>
+                            <div class="dropdown-content">
+                                <router-link to="/admin/categories">Categories</router-link>
+                                <router-link to="/admin/pieces">Pieces</router-link>
+                            </div>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <div class="dropdown">
                             <router-link class="nav-link" to="/wardrobe"

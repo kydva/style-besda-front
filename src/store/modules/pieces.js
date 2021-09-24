@@ -17,6 +17,11 @@ export default {
             await axios.post("http://localhost:3000/pieces", formData, {withCredentials: true});
         },
 
+        async [actions.REMOVE_PIECE]({commit}, pieceId){
+            await axios.delete("http://localhost:3000/pieces/" + pieceId, {withCredentials: true});
+            commit(mutations.REMOVE_PIECE);
+        },
+
         async [actions.FETCH_PIECES]({commit, state}, query = {}){
             const res = await axios.get("http://localhost:3000/pieces", {params: query, withCredentials: true});
             if (query.skip === state.pieces.length && query.skip !== 0) {
@@ -46,6 +51,10 @@ export default {
             state.pieces = state.pieces.concat(pieces);
         },
 
+        [mutations.REMOVE_PIECE](state, pieceId) {
+            state.pieces = state.pieces.filter((piece) => piece._id != pieceId);
+        },
+
         [mutations.PURGE_PIECES](state) {
             state.pieces = [];
         },
@@ -55,20 +64,16 @@ export default {
         },
 
         [mutations.ADD_TO_WARDROBE](state, pieceId) {
-            const piece = state.pieces.find((piece) => {
-                return piece._id === pieceId;
-            });
+            const piece = state.pieces.find((piece) => piece._id === pieceId);
             if (piece) {
                 piece.inWardrobe = true;
             }
         },
 
         [mutations.REMOVE_FROM_WARDROBE](state, pieceId) {
-            const piece = state.pieces.find((piece) => {
-                return piece._id === pieceId;
-            });
+            const piece = state.pieces.find((piece) => piece._id === pieceId);
             if (piece) {
-            piece.inWardrobe = false;
+                piece.inWardrobe = false;
             }
         }
     },

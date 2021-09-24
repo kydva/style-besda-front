@@ -10,6 +10,7 @@ export const UPDATE_CATEGORY = "updateCategory";
 export const REMOVE_CATEGORY = "removeCategory";
 
 export const ADD_PIECE = "addPiece";
+export const REMOVE_PIECE = "removePiece";
 export const FETCH_PIECES = "fetchPieces";
 export const ADD_TO_WARDROBE = "addToWardrobe";
 export const REMOVE_FROM_WARDROBE = "removeFromWardrobe";
