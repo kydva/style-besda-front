@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.VUE_APP_BACKEND_URL + "/api/v1/";
+const API_URL = process.env.VUE_APP_BASE_URL + "/api/v1/";
 axios.defaults.withCredentials = true;
 
 export default {

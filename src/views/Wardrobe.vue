@@ -43,7 +43,7 @@
                     <div>
                         <img
                             class="img-fluid rounded"
-                            :src="'http://localhost:3000/img/pieces/' + piece.img"
+                            :src="$baseUrl + '/img/pieces/' + piece.img"
                         />
                     </div>
 
@@ -146,7 +146,6 @@ export default {
 </script>
 
 <style scoped>
-
 .filter-panel {
     margin-top: 2rem;
     display: flex;

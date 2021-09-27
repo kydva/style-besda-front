@@ -26,7 +26,7 @@
                         <div>
                             <img
                                 class="img-fluid me-1"
-                                :src="'http://localhost:3000/img/pieces/' + node.raw.img"
+                                :src="$baseUrl + '/img/pieces/' + node.raw.img"
                             />
                             {{ node.label }}
                         </div>

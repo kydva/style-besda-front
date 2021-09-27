@@ -47,7 +47,7 @@
                     <router-link :to="'/looks/' + look._id" class="look-img-container">
                         <img
                             class="img-fluid rounded look-img"
-                            :src="'http://localhost:3000/img/looks/' + look.img"
+                            :src="$baseUrl + '/img/looks/' + look.img"
                         />
                     </router-link>
                     <div>
@@ -65,7 +65,7 @@
                         <div class="dropdown">
                             <img
                                 class="img-fluid rounded piece-img"
-                                :src="'http://localhost:3000/img/pieces/' + piece.img"
+                                :src="$baseUrl + '/img/pieces/' + piece.img"
                             />
                             <div class="piece-availability">
                                 <div v-if="piece.inWardrobe"><i class="fas fa-check"></i></div>
@@ -73,7 +73,7 @@
                             <div class="dropdown-content">
                                 <img
                                     class="img-fluid rounded"
-                                    :src="'http://localhost:3000/img/pieces/' + piece.img"
+                                    :src="$baseUrl + '/img/pieces/' + piece.img"
                                 />
                                 <div
                                     class="add-to-wardrobe-btn"

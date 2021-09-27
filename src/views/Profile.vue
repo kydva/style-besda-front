@@ -28,7 +28,7 @@
                     <div class="look-img-container">
                         <router-link :to="'/looks/' + look._id">
                             <img
-                                :src="'http://localhost:3000/img/looks/' + look.img"
+                                :src="$baseUrl + '/img/looks/' + look.img"
                                 class="img-fluid rounded look-img"
                             />
                         </router-link>

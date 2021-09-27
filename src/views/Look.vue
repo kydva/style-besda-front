@@ -17,7 +17,7 @@
                 <div class="look-img-container mx-auto">
                     <img
                         class="img-fluid rounded look-img"
-                        :src="'http://localhost:3000/img/looks/' + look.img"
+                        :src="$baseUrl + '/img/looks/' + look.img"
                     />
                 </div>
 
@@ -37,7 +37,11 @@
                     <i class="fas fa-trash"></i>
                     Delete
                 </div>
-                <ConfirmModal v-if="deleteConfirm" @confirm="deleteLook" @cancel="() => (deleteConfirm = false)">
+                <ConfirmModal
+                    v-if="deleteConfirm"
+                    @confirm="deleteLook"
+                    @cancel="() => (deleteConfirm = false)"
+                >
                     Are you sure you want to delete this look?
                 </ConfirmModal>
             </div>
@@ -49,12 +53,12 @@
                     <div class="piece-img-container dropdown">
                         <img
                             class="img-fluid rounded piece-img"
-                            :src="'http://localhost:3000/img/pieces/' + piece.img"
+                            :src="$baseUrl + '/img/pieces/' + piece.img"
                         />
                         <div class="dropdown-content">
                             <img
                                 class="img-fluid rounded"
-                                :src="'http://localhost:3000/img/pieces/' + piece.img"
+                                :src="$baseUrl + '/img/pieces/' + piece.img"
                             />
                             <div
                                 class="add-to-wardrobe-btn"
@@ -116,7 +120,7 @@ export default {
             this.deleteConfirm = false;
             await this.$store.dispatch("looks/" + DELETE_LOOK, this.look._id);
             this.$router.back();
-        }
+        },
     },
     async mounted() {
         const lookId = this.$route.params.id;
