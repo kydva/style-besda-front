@@ -27,7 +27,7 @@ export default {
         },
 
         async [actions.REGISTER]({ dispatch }, userData) {
-            await userApi.create(userData);
+            await userApi.register(userData);
             await dispatch(actions.FETCH_USER);
         },
 

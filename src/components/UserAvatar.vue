@@ -17,7 +17,7 @@ export default {
         },
         avatarUrl() {
             return this.user.avatar
-                ? process.env.VUE_APP_BACKEND_URL + "/img/users/" + this.user.avatar
+                ? this.$baseUrl + "/img/users/" + this.user.avatar
                 : this.defaultAvatar;
         },
         avatarStyle() {
