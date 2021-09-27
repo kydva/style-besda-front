@@ -1,6 +1,6 @@
 import * as actions from "../actions.type";
 import * as mutations from "../mutations.type";
-import axios from "axios";
+import looksApi from "../../api/looks";
 
 export default {
     state: {
@@ -10,21 +10,21 @@ export default {
     },
     actions: {
         async [actions.FETCH_LOOK]({commit}, id) {
-            const res = await axios.get("http://localhost:3000/looks/" + id, {withCredentials: true});
+            const res = await looksApi.getLook(id);
             commit(mutations.SET_LOOK, res.data.look);
         },
         async [actions.DELETE_LOOK](context, id){
-            await axios.delete("http://localhost:3000/looks/" + id, {withCredentials: true});
+            await looksApi.delete(id);
         },
         async [actions.ADD_LOOK](context, look) {
             const formData = new FormData();
             Object.keys(look).forEach((key) => {
                 formData.append(key, look[key]);
             });
-            await axios.post("http://localhost:3000/looks", formData, {withCredentials: true});
+            await looksApi.create(formData);
         },
         async [actions.FETCH_LOOKS]({commit, state}, query) {
-            const res = await axios.get("http://localhost:3000/looks", {params: query, withCredentials: true});
+            const res = await looksApi.getLooks(query);
             if (query.skip === state.looks.length && query.skip !== 0) {
                 commit(mutations.ADD_LOOKS, res.data.looks);
             } else {
@@ -33,19 +33,19 @@ export default {
             }
         },
         async [actions.ADD_TO_FAVORITES]({commit}, lookId){
-            await axios.put("http://localhost:3000/users/me/favorites/" + lookId, null, {withCredentials: true});
+            await looksApi.addToFavorites(lookId);
             commit(mutations.ADD_TO_FAVORITES, lookId);
         },
         async [actions.REMOVE_FROM_FAVORITES]({commit}, lookId){
-            await axios.delete("http://localhost:3000/users/me/favorites/" + lookId,  {withCredentials: true});
+            await looksApi.removeFromFavorites(lookId);
             commit(mutations.REMOVE_FROM_FAVORITES, lookId);
         },
         async [actions.DISLIKE_LOOK]({commit}, lookId){
-            await axios.put("http://localhost:3000/users/me/hidden-looks/" + lookId, null, {withCredentials: true});
+            await looksApi.dislike(lookId);
             commit(mutations.DISLIKE_LOOK, lookId);
         },
         async [actions.CANCEL_LOOK_DISLIKE]({commit}, lookId){
-            await axios.delete("http://localhost:3000/users/me/hidden-looks/" + lookId,  {withCredentials: true});
+            await looksApi.cancelDislike(lookId);
             commit(mutations.CANCEL_LOOK_DISLIKE, lookId);
         }
     },

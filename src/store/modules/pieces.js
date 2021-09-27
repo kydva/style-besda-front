@@ -1,7 +1,6 @@
 import * as actions from "../actions.type";
 import * as mutations from "../mutations.type";
-
-import axios from "axios";
+import piecesApi from "../../api/pieces";
 
 export default {
     state: {
@@ -10,20 +9,16 @@ export default {
     },
     actions: {
         async [actions.ADD_PIECE](context, piece){
-            const formData = new FormData();
-            Object.keys(piece).forEach((key) => {
-                formData.append(key, piece[key]);
-            });
-            await axios.post("http://localhost:3000/pieces", formData, {withCredentials: true});
+            await piecesApi.create(piece);
         },
 
         async [actions.REMOVE_PIECE]({commit}, pieceId){
-            await axios.delete("http://localhost:3000/pieces/" + pieceId, {withCredentials: true});
+            await piecesApi.delete(pieceId);
             commit(mutations.REMOVE_PIECE);
         },
 
         async [actions.FETCH_PIECES]({commit, state}, query = {}){
-            const res = await axios.get("http://localhost:3000/pieces", {params: query, withCredentials: true});
+            const res = await piecesApi.get(query);
             if (query.skip === state.pieces.length && query.skip !== 0) {
                 commit(mutations.ADD_PIECES, res.data.pieces);
             } else {
@@ -33,12 +28,12 @@ export default {
         },
 
         async [actions.ADD_TO_WARDROBE]({commit}, pieceId) {
-            await axios.put(`http://localhost:3000/users/me/wardrobe/${pieceId}`, null, {withCredentials: true});
+            await piecesApi.addToWardrobe(pieceId);
             commit(mutations.ADD_TO_WARDROBE, pieceId);
         },
 
         async [actions.REMOVE_FROM_WARDROBE]({commit}, pieceId) {
-            await axios.delete(`http://localhost:3000/users/me/wardrobe/${pieceId}`, {withCredentials: true});
+            await piecesApi.removeFromWardrobe(pieceId);
             commit(mutations.REMOVE_FROM_WARDROBE, pieceId);
         }
     },

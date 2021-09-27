@@ -1,6 +1,6 @@
 import * as actions from "../actions.type";
 import * as mutations from "../mutations.type";
-import axios from "axios";
+import categoriesApi from "../../api/piece-categories";
 
 export default {
     state: {
@@ -9,22 +9,22 @@ export default {
 
     actions: {
         async [actions.FETCH_CATEGORIES]({ commit }) {
-            const res = await axios.get("http://localhost:3000/piece-categories", {withCredentials: true});
+            const res = await categoriesApi.get();
             commit(mutations.SET_CATEGORIES, res.data.categories);
         },
 
         async [actions.ADD_CATEGORY]({ dispatch }, category) {
-            await axios.post("http://localhost:3000/piece-categories", category, { withCredentials: true });
+            await categoriesApi.create(category);
             await dispatch(actions.FETCH_CATEGORIES);
         },
 
         async [actions.REMOVE_CATEGORY]({ dispatch }, categoryId) {
-            await axios.delete(`http://localhost:3000/piece-categories/${categoryId}`, { withCredentials: true });
+            await categoriesApi.delete(categoryId);
             await dispatch(actions.FETCH_CATEGORIES);
         },
 
         async [actions.UPDATE_CATEGORY]({ dispatch }, category) {
-            await axios.patch(`http://localhost:3000/piece-categories/${category.id}`, { name: category.name }, { withCredentials: true });
+            await categoriesApi.update(category.id, {name: category.name});
             await dispatch(actions.FETCH_CATEGORIES);
         }
     },

@@ -1,6 +1,6 @@
 import * as actions from "../actions.type";
 import * as mutations from "../mutations.type";
-import axios from "axios";
+import userApi from "../../api/user";
 
 export default {
     state: {
@@ -22,33 +22,29 @@ export default {
 
     actions: {
         async [actions.LOGIN]({ commit }, credentials) {
-            const res = await axios.post("http://localhost:3000/login", credentials, { withCredentials: true });
+            const res = await userApi.login(credentials);
             commit(mutations.SET_USER, res.data.user);
         },
 
         async [actions.REGISTER]({ dispatch }, userData) {
-            await axios.post("http://localhost:3000/register", userData, { withCredentials: true });
+            await userApi.create(userData);
             await dispatch(actions.FETCH_USER);
         },
 
         async [actions.LOGOUT]({commit}) {
-            await axios.get("http://localhost:3000/logout", {withCredentials: true});
+            await userApi.logout();
             commit(mutations.PURGE_USER);
         },
 
         async [actions.FETCH_USER]({ commit }) {
-            const res = await axios.get("http://localhost:3000/users/me", { withCredentials: true });
+            const res = await userApi.getUser();
             if (res.data.user) {
                 commit(mutations.SET_USER, res.data.user);
             } else commit(mutations.PURGE_USER);
         },
 
-        async [actions.UPDATE_USER]({dispatch}, payload) {
-            const formData = new FormData();
-            Object.keys(payload).forEach((key) => {
-                formData.append(key, payload[key]);
-            });
-            await axios.patch("http://localhost:3000/users/me", formData, { withCredentials: true });
+        async [actions.UPDATE_USER]({dispatch}, data) {
+            await userApi.updateUser(data);
             await dispatch(actions.FETCH_USER);
         }
     },

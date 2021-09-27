@@ -1,6 +1,6 @@
 import * as actions from "../actions.type";
 import * as mutations from "../mutations.type";
-import axios from "axios";
+import profileApi from "../../api/profile";
 
 export default {
     state: {
@@ -9,7 +9,7 @@ export default {
 
     actions: {
         async [actions.FETCH_PROFILE]({commit}, id) {
-            const res = await axios.get("http://localhost:3000/users/" + id); 
+            const res = await profileApi.get(id);
             commit(mutations.SET_PROFILE, res.data.user);
         }
     },
