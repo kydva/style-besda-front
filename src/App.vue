@@ -16,6 +16,7 @@ import { FETCH_CATEGORIES, FETCH_USER } from "./store/actions.type";
 export default {
     components: { TheNavBar },
     async mounted() {
+        document.title = "Style Besda";
         this.$store.dispatch(FETCH_USER);
         this.$store.dispatch("pieceCategories/" + FETCH_CATEGORIES);
     },
