@@ -17,11 +17,7 @@ export default {
             await looksApi.delete(id);
         },
         async [actions.ADD_LOOK](context, look) {
-            const formData = new FormData();
-            Object.keys(look).forEach((key) => {
-                formData.append(key, look[key]);
-            });
-            await looksApi.create(formData);
+            await looksApi.create(look);
         },
         async [actions.FETCH_LOOKS]({commit, state}, query) {
             const res = await looksApi.getLooks(query);
