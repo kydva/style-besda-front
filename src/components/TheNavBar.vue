@@ -1,10 +1,9 @@
 <template>
-    <div>
+    <div v-if="isAuthenticated">
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3 mb-4">
             <router-link to="/" class="navbar-brand">Style Besda</router-link>
             <div class="navbar-toggler">
                 <Slide closeOnNavigation right noOverlay class="nav-item">
-                    <template v-if="isAuthenticated">
                         <span class="menu-section-name">Wardrobe</span>
                         <router-link to="/wardrobe">My wardrobe</router-link>
                         <router-link to="/wardrobe/fill-up">Fill up</router-link>
@@ -16,15 +15,10 @@
                         <router-link :to="'/users/' + user._id">My profile</router-link>
                         <router-link to="/my-profile/settings">Settings</router-link>
                         <a href="#" @click.prevent="logout">Logout</a>
-                    </template>
-                    <template v-else>
-                        <router-link to="/login">Sign in</router-link>
-                        <router-link to="/register">Sign up</router-link>
-                    </template>
                 </Slide>
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav" v-if="isAuthenticated">
+                <ul class="navbar-nav">
                      <li class="nav-item" v-if="isAdmin">
                         <div class="dropdown">
                             <span class="nav-link">Admin panel <i class="fas fa-caret-down"></i></span>
@@ -73,14 +67,6 @@
                                 <a href="#" @click.prevent="logout">Logout</a>
                             </div>
                         </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav" v-else>
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/login">Sign in</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/register">Sign up</router-link>
                     </li>
                 </ul>
             </div>
