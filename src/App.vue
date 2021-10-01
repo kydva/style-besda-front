@@ -2,7 +2,7 @@
     <div id="app">
         <TheNavBar></TheNavBar>
         <transition mode="out-in" name="fade">
-            <router-view></router-view>
+            <router-view class="router-view"></router-view>
         </transition>
         <TheFooter></TheFooter>
     </div>
@@ -27,6 +27,10 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+}
+
+.router-view {
+    min-height: 77vh;
 }
 
 .form-group {

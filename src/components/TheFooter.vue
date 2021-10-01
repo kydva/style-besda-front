@@ -11,8 +11,8 @@
 
 <style scoped>
 .footer {
-    margin-top: 5rem;
-    padding: 2rem;
+    margin-top: 2rem;
+    padding: 1rem;
     border-top: 1px solid #b1b1b1;
     border-radius: 4px;
     font-size: 1.3rem;

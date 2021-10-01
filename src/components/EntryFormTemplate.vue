@@ -39,6 +39,7 @@ export default {
 <style scoped>
 .container {
     padding-top: 20vh;
+    min-height: 87vh;
 }
 
 .btn {
