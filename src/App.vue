@@ -1,19 +1,20 @@
 <template>
     <div id="app">
         <TheNavBar></TheNavBar>
-
         <transition mode="out-in" name="fade">
             <router-view></router-view>
         </transition>
+        <TheFooter></TheFooter>
     </div>
 </template>
 
 <script>
 import TheNavBar from "@/components/TheNavBar";
+import TheFooter from "@/components/TheFooter";
 import { FETCH_CATEGORIES, FETCH_USER } from "./store/actions.type";
 
 export default {
-    components: { TheNavBar },
+    components: { TheNavBar, TheFooter },
     async mounted() {
         document.title = "Style Besda";
         this.$store.dispatch(FETCH_USER);
