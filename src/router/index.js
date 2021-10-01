@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Wardrobe from "@/views/Wardrobe";
 import Looks from "@/views/Looks";
 import { FETCH_USER } from "../store/actions.type";
-//import router.app.$store from "../router.app.$store";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -26,23 +26,23 @@ const routes = [
 const router = new VueRouter({ routes, mode: "history" });
 
 router.beforeResolve(async (to, from, next) => {
-        if (!router.app.$store.getters.isAuthenticated) {
-            await router.app.$store.dispatch(FETCH_USER);
+        if (!store.getters.isAuthenticated) {
+            await store.dispatch(FETCH_USER);
         }
-        const isAuthenticated = router.app.$store.getters.isAuthenticated;
-        if (to.name === "home" && isAuthenticated) {
+
+        if (to.name === "home" && store.getters.isAuthenticated) {
             return next("/looks/recommended");
         }
     
-        if (to.matched.some(record => record.meta.guest) && isAuthenticated) {
+        if (to.matched.some(record => record.meta.guest) && store.getters.isAuthenticated) {
             return next(false);
         }
     
-        if (to.matched.some(record => record.meta.admin) && !router.app.$store.getters.isAdmin) {
+        if (to.matched.some(record => record.meta.admin) && !store.getters.isAdmin) {
             return next(false);
         }
     
-        if (to.matched.some(record => record.meta.authenticated) && !isAuthenticated) {
+        if (to.matched.some(record => record.meta.authenticated) && !store.getters.isAuthenticated) {
             return next("/login");
         }
     
