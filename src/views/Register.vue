@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-        <h3>Sign up</h3>
+    <EntryFormTemplate state="register">
         <form class="form-group w-50 mx-auto" @submit.prevent="onSubmit">
             <div class="alert-danger" :key="field" v-for="(error, field) in errors">
                 {{ error }}
@@ -25,15 +24,17 @@
                 v-model="user.passwordConfirm"
                 class="form-control"
             />
-            <button class="btn btn-outline-secondary">Send</button>
+            <button class="btn btn-outline-secondary mx-auto">Send</button>
         </form>
-    </div>
+    </EntryFormTemplate>
 </template>
 
 <script>
+import EntryFormTemplate from "../components/EntryFormTemplate.vue";
 import { REGISTER } from "../store/actions.type";
 
 export default {
+    components: { EntryFormTemplate },
     data() {
         return {
             user: {

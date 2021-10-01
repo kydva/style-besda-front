@@ -1,7 +1,6 @@
 <template>
-    <div class="container">
-        <h3>Sign in</h3>
-        <form class="w-50 mx-auto" @submit.prevent="onSubmit">
+    <EntryFormTemplate state="login">
+        <form class="mx-auto" @submit.prevent="onSubmit">
             <div v-if="error" class="alert-danger">{{ error }}</div>
             <input
                 placeholder="Name"
@@ -17,15 +16,17 @@
                 type="password"
                 name="password"
             />
-            <button class="btn btn-outline-secondary">Send</button>
+                <button class="btn btn-outline-secondary mx-auto">Send</button>
         </form>
-    </div>
+    </EntryFormTemplate>
 </template>
 
 <script>
+import EntryFormTemplate from "../components/EntryFormTemplate.vue";
 import { LOGIN } from "../store/actions.type";
 
 export default {
+    components: { EntryFormTemplate },
     data() {
         return {
             credentials: {
@@ -54,5 +55,15 @@ export default {
 <style scoped>
 .form-control {
     margin: 1rem 0 1rem 0;
+}
+
+.container {
+    padding-top: 20vh;
+}
+
+@media screen and (min-width: 768px) {
+    form {
+        width: 50%;
+    }
 }
 </style>
