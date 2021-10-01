@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="filter-panel">
             <form class="d-inline-flex search-form p-2">
                 <input

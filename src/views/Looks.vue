@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="filter-panel text-secondary">
             <div class="filter-panel-item">
                 <select

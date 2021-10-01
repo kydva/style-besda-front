@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h3>Sign in</h3>
         <form class="w-50 mx-auto" @submit.prevent="onSubmit">
             <div v-if="error" class="alert-danger">{{ error }}</div>

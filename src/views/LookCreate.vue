@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="my-4">Create look</h1>
 
         <form class="w-75 mx-auto" @submit.prevent="onSubmit">

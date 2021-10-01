@@ -1,11 +1,10 @@
 <template>
     <div id="app">
         <TheNavBar></TheNavBar>
-        <div class="container">
-            <transition mode="out-in" name="fade">
-                <router-view></router-view>
-            </transition>
-        </div>
+
+        <transition mode="out-in" name="fade">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 

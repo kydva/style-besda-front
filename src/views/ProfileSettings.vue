@@ -1,5 +1,5 @@
 <template>
-    <div class="root">
+    <div class="container">
         <div v-if="updated" class="text-success">Data successfully updated</div>
         <div class="my-5">
             <h3>Name</h3>
@@ -134,7 +134,7 @@ export default {
 
 
 <style scoped>
-.root {
+.container {
     text-align: left;
 }
 

@@ -1,37 +1,39 @@
 <template>
-    <div class="my-4 row justify-content-center">
-        <div class="d-flex flex-column col-lg-3">
-            <div class="mx-auto">
-                <UserAvatar class="my-1" :user="profile" />
-                <div class="profile-name">{{ profile.name }}</div>
+    <div class="container">
+        <div class="my-4 row justify-content-center">
+            <div class="d-flex flex-column col-lg-3">
+                <div class="mx-auto">
+                    <UserAvatar class="my-1" :user="profile" />
+                    <div class="profile-name">{{ profile.name }}</div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-8">
-            <div class="bg-light p-3 mb-2 text-secondary rounded">
-                Registered at: {{ registeredAt }}
-            </div>
-            <div class="bg-light p-3 mb-2 text-secondary rounded">
-                Gender: {{ profile.gender == "M" ? "Male" : "Female" }}
-            </div>
-            <div class="bg-light p-3 mb-2 text-secondary rounded">
-                Pieces in wardrobe: {{ profile.wardrobe.length }}
-            </div>
-            <div class="bg-light p-3 text-secondary rounded">
-                Created looks: {{ profile.looks.length }}
-            </div>
-            <div class="row m-0 bg-light">
-                <div
-                    class="look col-xl-2 col-lg-3 col-md-2 col-sm-3"
-                    v-for="look in profile.looks"
-                    :key="look._id"
-                >
-                    <div class="look-img-container">
-                        <router-link :to="'/looks/' + look._id">
-                            <img
-                                :src="$baseUrl + '/img/looks/' + look.img"
-                                class="img-fluid rounded look-img"
-                            />
-                        </router-link>
+            <div class="col-lg-8">
+                <div class="bg-light p-3 mb-2 text-secondary rounded">
+                    Registered at: {{ registeredAt }}
+                </div>
+                <div class="bg-light p-3 mb-2 text-secondary rounded">
+                    Gender: {{ profile.gender == "M" ? "Male" : "Female" }}
+                </div>
+                <div class="bg-light p-3 mb-2 text-secondary rounded">
+                    Pieces in wardrobe: {{ profile.wardrobe.length }}
+                </div>
+                <div class="bg-light p-3 text-secondary rounded">
+                    Created looks: {{ profile.looks.length }}
+                </div>
+                <div class="row m-0 bg-light">
+                    <div
+                        class="look col-xl-2 col-lg-3 col-md-2 col-sm-3"
+                        v-for="look in profile.looks"
+                        :key="look._id"
+                    >
+                        <div class="look-img-container">
+                            <router-link :to="'/looks/' + look._id">
+                                <img
+                                    :src="$baseUrl + '/img/looks/' + look.img"
+                                    class="img-fluid rounded look-img"
+                                />
+                            </router-link>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 <template>
+<div class="container">
     <div class="look">
         <div class="d-flex justify-content-between flex-wrap">
             <div class="return-back-btn" title="Return back" @click="() => this.$router.back()">
@@ -75,6 +76,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>

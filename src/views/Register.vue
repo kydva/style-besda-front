@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h3>Sign up</h3>
         <form class="form-group w-50 mx-auto" @submit.prevent="onSubmit">
             <div class="alert-danger" :key="field" v-for="(error, field) in errors">
