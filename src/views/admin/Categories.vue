@@ -11,11 +11,15 @@
 <script>
 import TheCategoryAddForm from "../../components/admin/TheCategoryAddForm.vue";
 import TheCategoryEditForm from "../../components/admin/TheCategoryEditForm.vue";
+import { FETCH_CATEGORIES } from "../../store/actions.type";
 
 export default {
     components: {
         TheCategoryAddForm,
         TheCategoryEditForm,
+    },
+    mounted() {
+        this.$store.dispatch("pieceCategories/" + FETCH_CATEGORIES);
     },
 };
 </script>

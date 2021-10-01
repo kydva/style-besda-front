@@ -229,7 +229,6 @@ export default {
     width: 30%;
     padding: 1rem 2rem 0 2rem;
     margin: 1rem;
-    border: 1px gray solid;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

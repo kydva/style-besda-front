@@ -11,15 +11,12 @@
 <script>
 import TheNavBar from "@/components/TheNavBar";
 import TheFooter from "@/components/TheFooter";
-import { FETCH_CATEGORIES, FETCH_USER } from "./store/actions.type";
 
 export default {
     components: { TheNavBar, TheFooter },
     async mounted() {
         document.title = "Style Besda";
-        this.$store.dispatch(FETCH_USER);
-        this.$store.dispatch("pieceCategories/" + FETCH_CATEGORIES);
-    },
+    }
 };
 </script>
 

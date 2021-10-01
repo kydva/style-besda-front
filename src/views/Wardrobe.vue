@@ -84,7 +84,12 @@
 import { mapState } from "vuex";
 import InfiniteLoading from "vue-infinite-loading";
 import PieceCategorySelect from "../components/PieceCategorySelect.vue";
-import { FETCH_PIECES, ADD_TO_WARDROBE, REMOVE_FROM_WARDROBE } from "../store/actions.type";
+import {
+    FETCH_PIECES,
+    ADD_TO_WARDROBE,
+    REMOVE_FROM_WARDROBE,
+    FETCH_CATEGORIES,
+} from "../store/actions.type";
 import { PURGE_PIECES } from "../store/mutations.type";
 export default {
     components: { PieceCategorySelect, InfiniteLoading },
@@ -141,6 +146,9 @@ export default {
         async removeFromWardrobe(pieceId) {
             await this.$store.dispatch("pieces/" + REMOVE_FROM_WARDROBE, pieceId);
         },
+    },
+    mounted() {
+        this.$store.dispatch("pieceCategories/" + FETCH_CATEGORIES);
     },
 };
 </script>

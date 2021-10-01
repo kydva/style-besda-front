@@ -1,18 +1,22 @@
 <template>
     <div>
         <h3>Add piece</h3>
-       <ThePieceAddForm/>
-       <h3 class="mt-4">Remove piece</h3>
-       <ThePieceRemoveForm/>
+        <ThePieceAddForm />
+        <h3 class="mt-4">Remove piece</h3>
+        <ThePieceRemoveForm />
     </div>
 </template>
 
 <script>
 import ThePieceAddForm from "../../components/admin/ThePieceAddForm.vue";
 import ThePieceRemoveForm from "../../components/admin/ThePieceRemoveForm.vue";
+import { FETCH_CATEGORIES } from "../../store/actions.type";
 
 export default {
-    components: { ThePieceAddForm, ThePieceRemoveForm }
+    components: { ThePieceAddForm, ThePieceRemoveForm },
+    mounted() {
+        this.$store.dispatch("pieceCategories/" + FETCH_CATEGORIES);
+    },
 };
 </script>
 
