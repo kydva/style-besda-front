@@ -118,12 +118,12 @@ export default {
 
 <style>
 .bm-burger-bars {
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(231, 231, 231) !important;
 }
 
 .bm-burger-button {
-    position: relative;
-    top: 0;
+    position: relative !important;
+    top: 0 !important;
     left: 0 !important;
 }
 
