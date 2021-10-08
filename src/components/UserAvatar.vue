@@ -13,7 +13,9 @@ export default {
     },
     computed: {
         defaultAvatar() {
-            return this.user.gender === "M" ? "/img/user-male.png" : "/img/user-female.png";
+            return this.user.gender === "M"
+                ? "/static/img/user-male.png"
+                : "/static/img/user-female.png";
         },
         avatarUrl() {
             return this.user.avatar

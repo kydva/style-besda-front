@@ -4,20 +4,24 @@
             <h1>Stop asking yourself <i>"what to wear?"</i></h1>
             <h3>Style Besda - your personal fashion-stylist</h3>
             <div class="d-flex justify-content-center flex-wrap">
-                <router-link to="/login" class="btn btn-light btn-lg mx-3 mt-3">Sign in</router-link>
-                <router-link to="/register" class="btn btn-light btn-lg mx-3 mt-3">Sign up</router-link>
+                <router-link to="/login" class="btn btn-light btn-lg mx-3 mt-3"
+                    >Sign in</router-link
+                >
+                <router-link to="/register" class="btn btn-light btn-lg mx-3 mt-3"
+                    >Sign up</router-link
+                >
             </div>
         </div>
         <div class="container">
             <div class="h3 my-5">
                 How does it work?
-                <hr class="mx-auto w-25">
+                <hr class="mx-auto w-25" />
             </div>
             <div class="steps">
                 <div class="step">
                     <div class="step-desc">Add items to your wardrobe</div>
                     <div class="step-img">
-                        <img src="/img/step1.png" />
+                        <img src="/static/img/step1.png" />
                     </div>
                 </div>
                 <hr />
@@ -26,7 +30,7 @@
                         Get personalized outfit recommendations based on your wardrobe
                     </div>
                     <div class="step-img">
-                        <img src="/img/step2.png" />
+                        <img src="/static/img/step2.png" />
                     </div>
                 </div>
                 <hr class="ms-auto" />
@@ -36,14 +40,14 @@
                         recommendations
                     </div>
                     <div class="step-img">
-                        <img src="/img/step3.png" />
+                        <img src="/static/img/step3.png" />
                     </div>
                 </div>
                 <hr />
                 <div class="step flex-md-row-reverse">
                     <div class="step-desc">Create and share your own outfit ideas</div>
                     <div class="step-img">
-                        <img src="/img/step4.png" />
+                        <img src="/static/img/step4.png" />
                     </div>
                 </div>
             </div>
@@ -54,7 +58,7 @@
 <style scoped>
 .head {
     padding-bottom: 2rem;
-    background: url("/img/clothes-bg.png") no-repeat center center fixed;
+    background: url("/static/img/clothes-bg.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
