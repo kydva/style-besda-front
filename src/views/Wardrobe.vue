@@ -113,6 +113,7 @@ export default {
     },
     watch: {
         infiniteId() {
+            this.skip = 0;
             this.$store.commit("pieces/" + PURGE_PIECES);
         },
     },
