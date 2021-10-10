@@ -10,13 +10,9 @@
 <script>
 import ThePieceAddForm from "../../components/admin/ThePieceAddForm.vue";
 import ThePieceRemoveForm from "../../components/admin/ThePieceRemoveForm.vue";
-import { FETCH_CATEGORIES } from "../../store/actions.type";
 
 export default {
     components: { ThePieceAddForm, ThePieceRemoveForm },
-    mounted() {
-        this.$store.dispatch("pieceCategories/" + FETCH_CATEGORIES);
-    },
 };
 </script>
 

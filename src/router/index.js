@@ -19,8 +19,9 @@ const routes = [
     { name: "looks-favorites", path: "/looks/favorites", component: Looks, props: { favorites: true }, meta: { authenticated: true } },
     { name: "looks-create", path: "/looks/create", component: () => import("@/views/LookCreate"), meta: { authenticated: true } },
     { name: "look", path: "/looks/:id", component: () => import("@/views/Look") },
-    { name: "categories", path: "/admin/categories", component: () => import("@/views/admin/Categories"), meta: { admin: true } },
-    { name: "pieces", path: "/admin/pieces", component: () => import("@/views/admin/Pieces"), meta: { admin: true } }
+    { name: "admin-category-create", path: "/admin/categories/create", component: () => import("@/views/admin/CategoryCreate"), meta: { admin: true } },
+    { name: "admin-category-edit", path: "/admin/categories/edit", component: () => import("@/views/admin/CategoryEdit"), meta: { admin: true } },
+    { name: "admin-pieces", path: "/admin/pieces", component: () => import("@/views/admin/Pieces"), meta: { admin: true } }
 ];
 
 const router = new VueRouter({ routes, mode: "history" });

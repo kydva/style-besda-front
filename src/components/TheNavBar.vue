@@ -23,7 +23,7 @@
                         <div class="dropdown">
                             <span class="nav-link">Admin panel <i class="fas fa-caret-down"></i></span>
                             <div class="dropdown-content">
-                                <router-link to="/admin/categories">Categories</router-link>
+                                <router-link to="/admin/categories/create">Categories</router-link>
                                 <router-link to="/admin/pieces">Pieces</router-link>
                             </div>
                         </div>

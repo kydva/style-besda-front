@@ -8,8 +8,8 @@ export default {
     },
 
     actions: {
-        async [actions.FETCH_CATEGORIES]({ commit }) {
-            const res = await categoriesApi.get();
+        async [actions.FETCH_CATEGORIES]({ commit }, query) {
+            const res = await categoriesApi.get(query);
             commit(mutations.SET_CATEGORIES, res.data.categories);
         },
 

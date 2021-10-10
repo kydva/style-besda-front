@@ -5,6 +5,7 @@
         :normalizer="normalizer"
         :multiple="multiple"
         :always-open="alwaysOpen"
+        :disabled="disabled"
     />
 </template>
 
@@ -19,6 +20,7 @@ export default {
         value: [Array, String],
         multiple: Boolean,
         alwaysOpen: Boolean,
+        disabled: Boolean
     },
     data: () => ({
         normalizer(node) {

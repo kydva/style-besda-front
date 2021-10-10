@@ -1,8 +1,8 @@
 import http from "./http";
 
 export default {
-    async get() {
-        return await http.get("piece-categories");
+    async get(query) {
+        return await http.get("piece-categories", {params: query});
     },
 
     async create(data) {
