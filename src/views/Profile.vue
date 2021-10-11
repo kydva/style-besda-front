@@ -15,7 +15,7 @@
                     Gender: {{ profile.gender == "M" ? "Male" : "Female" }}
                 </div>
                 <div class="bg-light p-3 mb-2 text-secondary rounded">
-                    Pieces in wardrobe: {{ profile.wardrobe.length }}
+                    Items in wardrobe: {{ profile.wardrobe.length }}
                 </div>
                 <div class="bg-light p-3 text-secondary rounded">
                     Created looks: {{ profile.looks.length }}
