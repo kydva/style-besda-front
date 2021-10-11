@@ -13,10 +13,7 @@ import TheNavBar from "@/components/TheNavBar";
 import TheFooter from "@/components/TheFooter";
 
 export default {
-    components: { TheNavBar, TheFooter },
-    async mounted() {
-        document.title = "Style Besda";
-    }
+    components: { TheNavBar, TheFooter }
 };
 </script>
 
