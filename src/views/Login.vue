@@ -41,7 +41,7 @@ export default {
             try {
                 this.error = null;
                 await this.$store.dispatch(LOGIN, this.credentials);
-                this.$router.back();
+                this.$router.push("/wardrobe");
             } catch (e) {
                 if (e.response.status === 401) {
                     this.error = "Invalid username or password. Please, try again.";

@@ -55,7 +55,7 @@ export default {
 
             try {
                 await this.$store.dispatch(REGISTER, this.user);
-                this.$router.back();
+                this.$router.push("/wardrobe");
             } catch (e) {
                 if (e.response.status === 400) {
                     this.errors = e.response.data.errors;
