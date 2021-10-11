@@ -31,7 +31,7 @@
                     Don't recommend me this look
                 </div>
                 <div
-                    v-if="!look.canRemove"
+                    v-if="look.canDelete"
                     @click="() => (deleteConfirm = true)"
                     class="remove-btn"
                 >
